@@ -13,6 +13,7 @@ Ideas for features
 * Adding a unique SessionId, based on the session of the current user/authentification.
 * Adding a Request Logger, that will collect basic informations about the current request.
 * Adding a Response Listener, that will collect basic informations about the returned response.
+* Adding arbitrary information to all logs by configuration.
 * Adding log handlers to monolog by dynamic configuration.
 * ... ?
 
