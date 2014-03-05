@@ -16,3 +16,8 @@ Ideas for features
 * Adding log handlers to monolog by dynamic configuration.
 * ... ?
 
+
+References
+----------
+
+Funny enought a example for adding a request id is in a [Symfony2 Cookbook](http://symfony.com/doc/current/cookbook/logging/monolog.html#adding-some-extra-data-in-the-log-messages), but not available in a bundle.
