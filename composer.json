@@ -1,0 +1,28 @@
+{
+    "name": "silpion/logger-extra-bundle",
+    "description": "Extra logging features for Monolog in a Symfony2 bundle.",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "keywords": ["symfony2", "bundle", "logging", "extra"],
+    "homepage": "https://github.com/h4cc/LoggerExtraBundle/",
+    "authors": [
+        {
+            "name": "Julius Beckmann",
+            "email": "beckmann@silpion.de"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "~2.4",
+        "phpunit/phpunit": "~3.7",
+        "matthiasnoback/symfony-config-test": "~0.1.1",
+        "matthiasnoback/symfony-dependency-injection-test": "~0.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silpion\\LoggerExtraBundle\\": ""
+        }
+    }
+}
