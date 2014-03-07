@@ -39,15 +39,15 @@ Configuration
 By default, this bundle will not do anything!
 Every feature has to be enabled on its own.
 
-Default configuration:
+Example configuration:
 ```
 silpion_logger_extra:
 
     # If a random request_id should be added to the [extra] section of each log message.
-    request_id:           false
+    request_id:           true
 
     # If a salted SHA1 of the session_id should be added to the [extra] section of each log message.
-    session_id:           false
+    session_id:           true
 
     # A list of "key: value" entries that will be set in the [extra] section of each log message (Overwrites existing keys!).
     additions:
