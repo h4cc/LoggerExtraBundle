@@ -23,6 +23,10 @@ class SessionIdProcessor
     private $provider;
     private $secret;
 
+    /**
+     * @param SessionIdProvider $provider
+     * @param string $secret
+     */
     public function __construct(SessionIdProvider $provider, $secret)
     {
         $this->provider = $provider;

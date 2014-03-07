@@ -109,8 +109,8 @@ class SilpionLoggerExtraExtensionTest extends AbstractExtensionTestCase
     /**
      * Checking is a service has a tag.
      *
-     * @param $serviceId
-     * @param $tagName
+     * @param string $serviceId
+     * @param string $tagName
      */
     protected function assertContainerBuilderHasServiceWithTag($serviceId, $tagName)
     {
@@ -124,8 +124,8 @@ class SilpionLoggerExtraExtensionTest extends AbstractExtensionTestCase
      * Assert that a serviceId uses a parameter to use a class.
      * If no parameter name is given, the name of the serviceId suffixed with '.class' will be used.
      *
-     * @param $serviceId
-     * @param $expectedClass
+     * @param string $serviceId
+     * @param string $expectedClass
      * @param null $expectedClassParameterValue
      */
     protected function assertContainerBuilderHasServiceWithParameteredClass(
