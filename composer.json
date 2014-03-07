@@ -11,9 +11,6 @@
             "email": "beckmann@silpion.de"
         }
     ],
-    "require": {
-
-    },
     "require-dev": {
         "symfony/framework-bundle": "~2.4",
         "phpunit/phpunit": "~3.7",
