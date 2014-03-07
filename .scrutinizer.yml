@@ -1,0 +1,7 @@
+
+
+tools:
+
+    # Fetch coverage information from travis.
+    external_code_coverage: true
+
