@@ -1,6 +1,14 @@
 LoggerExtraBundle
 =================
 
+[![Build Status](https://travis-ci.org/h4cc/LoggerExtraBundle.png?branch=master)](https://travis-ci.org/h4cc/LoggerExtraBundle)
+[![Latest Stable Version](https://poser.pugx.org/silpion/logger-extra-bundle/v/stable.png)](https://packagist.org/packages/silpion/logger-extra-bundle)
+[![License](https://poser.pugx.org/silpion/logger-extra-bundle/license.png)](https://packagist.org/packages/silpion/logger-extra-bundle)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/h4cc/LoggerExtraBundle/badges/quality-score.png?s=b72d47d970efc18d3bda7fa8cafb50572f075d77)](https://scrutinizer-ci.com/g/h4cc/LoggerExtraBundle/)
+[![Code Coverage](https://scrutinizer-ci.com/g/h4cc/LoggerExtraBundle/badges/coverage.png?s=e4481b53f54f85b768fcc5f8cce170f53e6faf30)](https://scrutinizer-ci.com/g/h4cc/LoggerExtraBundle/)
+[![HHVM Status](http://hhvm.h4cc.de/badge/silpion/logger-extra-bundle.png)](http://hhvm.h4cc.de/package/silpion/logger-extra-bundle)
+[![Dependency Status](https://www.versioneye.com/php/silpion:logger-extra-bundle/dev-master/badge.png)](https://www.versioneye.com/php/silpion:logger-extra-bundle/dev-master)
+
 Symfony2 Bundle for Logging related functionality. This bundle can give you these features:
 
 * Add a unique RequestId to each message of the current request.
