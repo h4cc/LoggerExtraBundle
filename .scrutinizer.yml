@@ -1,7 +1,11 @@
 
 
-tools:
+before_commands:
+    - "composer install --prefer-dist --no-interaction"
 
-    # Fetch coverage information from travis.
-    external_code_coverage: true
+tools:
+    php_code_coverage:
+        enabled: true
+        test_command: php vendor/bin/phpunit
+
 
