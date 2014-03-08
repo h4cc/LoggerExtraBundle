@@ -14,6 +14,8 @@ Symfony2 Bundle for Logging related functionality. This bundle can give you thes
 * Add a unique RequestId to each message of the current request.
 * Add a unique SessionId to each message dependent on current session id.
 * Add arbitrary "key: value" pairs to each message of the current request.
+* Create a log entry on a MASTER Request.
+* Create a log entry on a Response.
 
 
 Installation
@@ -60,18 +62,15 @@ silpion_logger_extra:
     # A list of "key: value" entries that will be set in the [extra] section of each log message (Overwrites existing keys!).
     additions:
         server_id: 42
+
+    logger:
+
+        # Will create a log entry on each incoming request.
+        on_request:           true
+
+        # Will create a log entry on each outgoing response.
+        on_response:          true
 ```
-
-Ideas for features
-------------------
-
-* (Adding a unique RequestId to the logs of each request. IMPLEMENTED)
-* (Adding a unique SessionId, based on the session of the current user/authentification. IMPLEMENTED)
-* (Adding arbitrary information to all logs by configuration. IMPLEMENTED)
-* Adding a Request Logger, that will collect basic informations about the current request.
-* Adding a Response Listener, that will collect basic informations about the returned response.
-* Adding log handlers to monolog by dynamic configuration.
-* ... ?
 
 
 References

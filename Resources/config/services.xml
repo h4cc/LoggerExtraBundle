@@ -13,7 +13,6 @@ file that was distributed with this source code.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
     <parameters>
 
         <!-- Secret used for this logger. Will be changed by SilpionLoggerExtraExtension. -->
@@ -27,9 +26,28 @@ file that was distributed with this source code.
 
         <parameter key="silpion_logger_extra.logger.processor.additions.class">Silpion\LoggerExtraBundle\Logger\Processor\AdditionsProcessor</parameter>
 
+        <parameter key="silpion_logger_extra.logger.request.class">Silpion\LoggerExtraBundle\Logger\Request\BasicRequestLogger</parameter>
+        <parameter key="silpion_logger_extra.listener.request.class">Silpion\LoggerExtraBundle\EventListener\KernelRequestListener</parameter>
+        <parameter key="silpion_logger_extra.logger.request.level">info</parameter>
+
+        <parameter key="silpion_logger_extra.logger.response.class">Silpion\LoggerExtraBundle\Logger\Response\BasicResponseLogger</parameter>
+        <parameter key="silpion_logger_extra.listener.response.class">Silpion\LoggerExtraBundle\EventListener\KernelResponseListener</parameter>
+        <parameter key="silpion_logger_extra.logger.response.level">info</parameter>
+
     </parameters>
 
     <services>
+
+        <!--
+            Info:
+            Some of these services will di nothing, except they have been tagged
+            by SilpionLoggerExtraExtension as a monolog processor or a kernel event listener.
+        -->
+
+        <!-- Internal aliases, so they can be changed externally. -->
+        <service id="silpion_logger_extra.logger" alias="logger" />
+        <service id="silpion_logger_extra.session" alias="session" />
+
 
         <!-- RequestId -->
 
@@ -48,7 +66,7 @@ file that was distributed with this source code.
         </service>
 
         <service id="silpion_logger_extra.logger.provider.session_id" class="%silpion_logger_extra.logger.provider.session_id.class%">
-            <argument type="service" id="session"/>
+            <argument type="service" id="silpion_logger_extra.session"/>
         </service>
 
 
@@ -58,19 +76,34 @@ file that was distributed with this source code.
             <argument type="collection" /> <!-- Map of key => value. Will be replaced by SilpionLoggerExtraExtension. -->
         </service>
 
-    </services>
 
-    <!--
-    <parameters>
-        <parameter key="silpion_logger_extra.example.class">Silpion\LoggerExtraBundle\Example</parameter>
-    </parameters>
+        <!-- RequestLogger -->
 
-    <services>
-        <service id="silpion_logger_extra.example" class="%silpion_logger_extra.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <!-- Service for handling the creation of logs for given request. -->
+        <service id="silpion_logger_extra.logger.request" class="%silpion_logger_extra.logger.request.class%">
+            <argument type="service" id="silpion_logger_extra.logger" />
+            <argument type="string">%silpion_logger_extra.logger.request.level%</argument>
         </service>
+
+        <!-- Eventlistener fetching the incoming request and forwarding to the request logger above. -->
+        <service id="silpion_logger_extra.listener.request" class="%silpion_logger_extra.listener.request.class%">
+            <argument type="service" id="silpion_logger_extra.logger.request" />
+        </service>
+
+
+        <!-- ResponseLogger -->
+
+        <!-- Service for handling the creation of logs for given response of request. -->
+        <service id="silpion_logger_extra.logger.response" class="%silpion_logger_extra.logger.response.class%">
+            <argument type="service" id="silpion_logger_extra.logger" />
+            <argument type="string">%silpion_logger_extra.logger.response.level%</argument>
+        </service>
+
+        <!-- Eventlistener fetching the incoming request and forwarding to the request logger above. -->
+        <service id="silpion_logger_extra.listener.response" class="%silpion_logger_extra.listener.response.class%">
+            <argument type="service" id="silpion_logger_extra.logger.response" />
+        </service>
+
     </services>
-    -->
+
 </container>

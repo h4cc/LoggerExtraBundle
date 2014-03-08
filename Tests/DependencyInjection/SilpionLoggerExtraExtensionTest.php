@@ -77,6 +77,38 @@ class SilpionLoggerExtraExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    public function testLoggerOnRequest()
+    {
+        $this->load(
+          array(
+            'logger' => array(
+              'on_request' => true,
+            ),
+          )
+        );
+
+        $this->assertContainerBuilderHasServiceWithTag(
+          'silpion_logger_extra.listener.request',
+          'kernel.event_listener'
+        );
+    }
+
+    public function testLoggerOnResponse()
+    {
+        $this->load(
+          array(
+            'logger' => array(
+              'on_response' => true,
+            ),
+          )
+        );
+
+        $this->assertContainerBuilderHasServiceWithTag(
+          'silpion_logger_extra.listener.response',
+          'kernel.event_listener'
+        );
+    }
+
     public function testDefaultServices()
     {
         $this->load();
@@ -103,6 +135,26 @@ class SilpionLoggerExtraExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceWithParameteredClass(
           'silpion_logger_extra.logger.provider.session_id',
           'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider'
+        );
+
+        // Request Logger
+        $this->assertContainerBuilderHasServiceWithParameteredClass(
+          'silpion_logger_extra.logger.request',
+          'Silpion\LoggerExtraBundle\Logger\Request\BasicRequestLogger'
+        );
+        $this->assertContainerBuilderHasServiceWithParameteredClass(
+          'silpion_logger_extra.listener.request',
+          'Silpion\LoggerExtraBundle\EventListener\KernelRequestListener'
+        );
+
+        // Response Logger
+        $this->assertContainerBuilderHasServiceWithParameteredClass(
+          'silpion_logger_extra.logger.response',
+          'Silpion\LoggerExtraBundle\Logger\Response\BasicResponseLogger'
+        );
+        $this->assertContainerBuilderHasServiceWithParameteredClass(
+          'silpion_logger_extra.listener.response',
+          'Silpion\LoggerExtraBundle\EventListener\KernelResponseListener'
         );
     }
 

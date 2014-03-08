@@ -58,5 +58,31 @@ class SilpionLoggerExtraExtension extends Extension
             $definition->addTag('monolog.processor', array('method' => 'processRecord'));
             $definition->replaceArgument(0, $config['additions']);
         }
+
+        // Add a logger for each incoming request.
+        if ($config['logger']['on_request']) {
+            $definition = $container->getDefinition('silpion_logger_extra.listener.request');
+            $definition->addTag(
+              'kernel.event_listener',
+              array(
+                'event' => 'kernel.request',
+                'method' => 'onKernelRequest',
+                'priority' => 500
+              )
+            );
+        }
+
+        // Add a logger for each outgoing response.
+        if ($config['logger']['on_response']) {
+            $definition = $container->getDefinition('silpion_logger_extra.listener.response');
+            $definition->addTag(
+              'kernel.event_listener',
+              array(
+                'event' => 'kernel.response',
+                'method' => 'onKernelResponse',
+                'priority' => 500
+              )
+            );
+        }
     }
 }

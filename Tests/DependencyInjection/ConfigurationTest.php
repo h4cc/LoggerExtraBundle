@@ -28,6 +28,10 @@ class ConfigurationTest extends AbstractConfigurationTestCase
           'request_id' => false,
           'session_id' => false,
           'additions' => array(),
+          'logger' => array(
+            'on_request' => false,
+            'on_response' => false,
+          ),
         );
 
         $this->assertProcessedConfigurationEquals(array($config), $processedConfig);
@@ -42,6 +46,10 @@ class ConfigurationTest extends AbstractConfigurationTestCase
             'foo' => 'bar',
             'example' => 42,
           ),
+          'logger' => array(
+            'on_request' => true,
+            'on_response' => true,
+          ),
         );
         $processedConfig = array(
           'request_id' => true,
@@ -49,6 +57,10 @@ class ConfigurationTest extends AbstractConfigurationTestCase
           'additions' => array(
             'foo' => 'bar',
             'example' => 42,
+          ),
+          'logger' => array(
+            'on_request' => true,
+            'on_response' => true,
           ),
         );
 
