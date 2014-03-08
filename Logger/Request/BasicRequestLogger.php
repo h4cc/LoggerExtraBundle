@@ -45,25 +45,30 @@ class BasicRequestLogger implements RequestLogger
 
     private function requestToArray(Request $request)
     {
-        // Some are commented, because the seem not so important for now.
-        return array(
+        $map = array(
           'request_method' => $request->getMethod(),
           'request_uri' => $request->getRequestUri(),
           'request_host' => $request->getHost(),
           'request_port' => $request->getPort(),
           'request_scheme' => $request->getScheme(),
           'request_client_ip' => $request->getClientIp(),
-            //'client_ips' => $request->getClientIps(),
           'request_content_type' => $request->getContentType(),
-            //'request_acceptable_content_types' => $request->getAcceptableContentTypes(),
-          'request_encodings' => $request->getEncodings(),
+          'request_acceptable_content_types' => $request->getAcceptableContentTypes(),
           'request_etags' => $request->getETags(),
           'request_charsets' => $request->getCharsets(),
           'request_languages' => $request->getLanguages(),
           'request_locale' => $request->getLocale(),
-            //'request_auth_user' => $request->getUser(),
-            //'request_auth_has_password' => (bool)$request->getPassword(),
+          'request_auth_user' => $request->getUser(),
+          'request_auth_has_password' => !is_null($request->getPassword()),
         );
+        // Attributes from newer versions.
+        if(method_exists($request, 'getEncodings')) {
+            $map['request_encodings'] = $request->getEncodings();
+        }
+        if(method_exists($request, 'getClientIps')) {
+            $map['request_client_ips'] = $request->getClientIps();
+        }
+        return $map;
     }
 }
  
