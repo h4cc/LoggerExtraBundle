@@ -31,7 +31,6 @@ class SilpionLoggerExtraExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
@@ -40,29 +39,41 @@ class SilpionLoggerExtraExtension extends Extension
             $container->setParameter('silpion_logger_extra.secret', $container->getParameter('kernel.secret'));
         }
 
+        $this->addMonologProcessors($container, $config);
+        $this->addAdditions($container, $config['additions']);
+        $this->addLogger($container, $config['logger']);
+    }
+
+    protected function addMonologProcessors(ContainerBuilder $container, array $config)
+    {
         // Activate adding if request_id if enabled.
         if ($config['request_id']) {
-            $definition = $container->getDefinition('silpion_logger_extra.logger.processor.request_id');
-            $definition->addTag('monolog.processor', array('method' => 'processRecord'));
+            $container->getDefinition('silpion_logger_extra.logger.processor.request_id')
+              ->addTag('monolog.processor', array('method' => 'processRecord'));
         }
 
         // Activate adding if session_id if enabled.
         if ($config['session_id']) {
-            $definition = $container->getDefinition('silpion_logger_extra.logger.processor.session_id');
-            $definition->addTag('monolog.processor', array('method' => 'processRecord'));
+            $container->getDefinition('silpion_logger_extra.logger.processor.session_id')
+              ->addTag('monolog.processor', array('method' => 'processRecord'));
         }
+    }
 
+    protected function addAdditions(ContainerBuilder $container, array $additions)
+    {
         // Add additions if any defined.
-        if ($config['additions']) {
-            $definition = $container->getDefinition('silpion_logger_extra.logger.processor.additions');
-            $definition->addTag('monolog.processor', array('method' => 'processRecord'));
-            $definition->replaceArgument(0, $config['additions']);
+        if ($additions) {
+            $container->getDefinition('silpion_logger_extra.logger.processor.additions')
+              ->addTag('monolog.processor', array('method' => 'processRecord'))
+              ->replaceArgument(0, $additions);
         }
+    }
 
+    protected function addLogger(ContainerBuilder $container, array $config)
+    {
         // Add a logger for each incoming request.
-        if ($config['logger']['on_request']) {
-            $definition = $container->getDefinition('silpion_logger_extra.listener.request');
-            $definition->addTag(
+        if ($config['on_request']) {
+            $container->getDefinition('silpion_logger_extra.listener.request')->addTag(
               'kernel.event_listener',
               array(
                 'event' => 'kernel.request',
@@ -73,9 +84,8 @@ class SilpionLoggerExtraExtension extends Extension
         }
 
         // Add a logger for each outgoing response.
-        if ($config['logger']['on_response']) {
-            $definition = $container->getDefinition('silpion_logger_extra.listener.response');
-            $definition->addTag(
+        if ($config['on_response']) {
+            $container->getDefinition('silpion_logger_extra.listener.response')->addTag(
               'kernel.event_listener',
               array(
                 'event' => 'kernel.response',
