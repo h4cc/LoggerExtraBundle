@@ -32,7 +32,7 @@ class SessionIdProcessorTest extends \PHPUnit_Framework_TestCase
           ->setMethods(array('getSessionId'))
           ->getMockForAbstractClass();
 
-        $this->processor = new SessionIdProcessor($this->providerMock, 'secret');
+        $this->processor = new SessionIdProcessor($this->providerMock);
     }
 
     public function testDefaultProcessing()
@@ -50,7 +50,7 @@ class SessionIdProcessorTest extends \PHPUnit_Framework_TestCase
           'foo' => 'bar',
           'extra' => array(
             'this' => 'that',
-            'session_id' => sha1('secret' . '42'),
+            'session_id' => '42',
           ),
         );
 

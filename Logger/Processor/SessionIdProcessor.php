@@ -21,31 +21,20 @@ use Silpion\LoggerExtraBundle\Logger\Provider\SessionIdProvider;
 class SessionIdProcessor
 {
     private $provider;
-    private $secret;
 
     /**
      * @param SessionIdProvider $provider
-     * @param string $secret
      */
-    public function __construct(SessionIdProvider $provider, $secret)
+    public function __construct(SessionIdProvider $provider)
     {
         $this->provider = $provider;
-        $this->secret = $secret;
     }
 
     public function processRecord(array $record)
     {
         // Do not add if key already exists.
         if (!isset($record['extra']['session_id'])) {
-            $sessionId = $this->provider->getSessionId();
-
-            // We assume the sessionId is sensitive data and has to be protected.
-            // So we use a SHA1 checksum.
-            if (!is_null($sessionId)) {
-                $sessionId = sha1($this->secret . $sessionId);
-            }
-
-            $record['extra']['session_id'] = $sessionId;
+            $record['extra']['session_id'] = $this->provider->getSessionId();
         }
 
         return $record;

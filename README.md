@@ -73,6 +73,17 @@ silpion_logger_extra:
 ```
 
 
+Usage
+-----------------
+
+If you want to use the current RequestId or SessionId somewhere in your application, see this code:
+
+```
+$requestId = $this->get('silpion_logger_extra')->getRequestId();
+$sessionId = $this->get('silpion_logger_extra')->getSessionId();
+```
+
+
 References
 ----------
 

@@ -33,7 +33,7 @@ class SymfonySessionIdProviderTest extends \PHPUnit_Framework_TestCase
           ->setMethods(array('isStarted', 'getId'))
           ->getMockForAbstractClass();
 
-        $this->provider = new SymfonySessionIdProvider($this->sessionProviderMock);
+        $this->provider = new SymfonySessionIdProvider($this->sessionProviderMock, 'secret');
     }
 
     public function testGetSessionIdWithStartedSession()
@@ -41,7 +41,7 @@ class SymfonySessionIdProviderTest extends \PHPUnit_Framework_TestCase
         $this->sessionProviderMock->expects($this->once())->method('isStarted')->will($this->returnValue(true));
         $this->sessionProviderMock->expects($this->once())->method('getId')->will($this->returnValue('42'));
 
-        $this->assertEquals('42', $this->provider->getSessionId());
+        $this->assertEquals(sha1('secret42'), $this->provider->getSessionId());
     }
 
     public function testGetSessionIdWithoutStartedSession()

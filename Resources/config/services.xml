@@ -18,6 +18,8 @@ file that was distributed with this source code.
         <!-- Secret used for this logger. Will be changed by SilpionLoggerExtraExtension. -->
         <parameter key="silpion_logger_extra.secret" />
 
+        <parameter key="silpion_logger_extra.class">Silpion\LoggerExtraBundle\Logger</parameter>
+
         <parameter key="silpion_logger_extra.logger.processor.request_id.class">Silpion\LoggerExtraBundle\Logger\Processor\RequestIdProcessor</parameter>
         <parameter key="silpion_logger_extra.logger.provider.request_id.class">Silpion\LoggerExtraBundle\Logger\Provider\Request\UniqRequestIdProvider</parameter>
 
@@ -40,13 +42,21 @@ file that was distributed with this source code.
 
         <!--
             Info:
-            Some of these services will di nothing, except they have been tagged
+            Some of these services will do nothing, except they have been tagged
             by SilpionLoggerExtraExtension as a monolog processor or a kernel event listener.
         -->
 
         <!-- Internal aliases, so they can be changed externally. -->
-        <service id="silpion_logger_extra.logger" alias="logger" />
-        <service id="silpion_logger_extra.session" alias="session" />
+        <service id="silpion_logger_extra.logger" alias="logger" public="false"/>
+        <service id="silpion_logger_extra.session" alias="session" public="false"/>
+
+
+        <!-- Facade of this bundle -->
+
+        <service id="silpion_logger_extra" class="%silpion_logger_extra.class%">
+            <argument type="service" id="silpion_logger_extra.logger.provider.request_id" />
+            <argument type="service" id="silpion_logger_extra.logger.provider.session_id" />
+        </service>
 
 
         <!-- RequestId -->
@@ -62,11 +72,11 @@ file that was distributed with this source code.
 
         <service id="silpion_logger_extra.logger.processor.session_id" class="%silpion_logger_extra.logger.processor.session_id.class%">
             <argument type="service" id="silpion_logger_extra.logger.provider.session_id" />
-            <argument>%silpion_logger_extra.secret%</argument>
         </service>
 
         <service id="silpion_logger_extra.logger.provider.session_id" class="%silpion_logger_extra.logger.provider.session_id.class%">
             <argument type="service" id="silpion_logger_extra.session"/>
+            <argument>%silpion_logger_extra.secret%</argument>
         </service>
 
 

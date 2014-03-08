@@ -113,6 +113,12 @@ class SilpionLoggerExtraExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
+        // Facade
+        $this->assertContainerBuilderHasServiceWithParameteredClass(
+          'silpion_logger_extra',
+          'Silpion\LoggerExtraBundle\Logger'
+        );
+
         // Processors
         $this->assertContainerBuilderHasServiceWithParameteredClass(
           'silpion_logger_extra.logger.processor.request_id',
