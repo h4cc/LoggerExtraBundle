@@ -17,6 +17,8 @@ Symfony2 Bundle for Logging related functionality. This bundle can give you thes
 * Create a log entry on a MASTER Request.
 * Create a log entry on a Response.
 
+There is also a Stack Middleware for logging Requests and Responses:
+[silpion/stack-logger](https://github.com/h4cc/StackLogger)
 
 Installation
 ------------------
