@@ -8,6 +8,7 @@ LoggerExtraBundle
 [![Code Coverage](https://scrutinizer-ci.com/g/h4cc/LoggerExtraBundle/badges/coverage.png?s=e4481b53f54f85b768fcc5f8cce170f53e6faf30)](https://scrutinizer-ci.com/g/h4cc/LoggerExtraBundle/)
 [![HHVM Status](http://hhvm.h4cc.de/badge/silpion/logger-extra-bundle.png)](http://hhvm.h4cc.de/package/silpion/logger-extra-bundle)
 [![Dependency Status](https://www.versioneye.com/php/silpion:logger-extra-bundle/dev-master/badge.png)](https://www.versioneye.com/php/silpion:logger-extra-bundle/dev-master)
+[![Project Status](http://stillmaintained.com/h4cc/LoggerExtraBundle.png)](http://stillmaintained.com/h4cc/LoggerExtraBundle)
 
 Symfony2 Bundle for Logging related functionality. This bundle can give you these features:
 
