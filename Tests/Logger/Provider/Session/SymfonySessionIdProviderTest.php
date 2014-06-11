@@ -30,7 +30,7 @@ class SymfonySessionIdProviderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->sessionProviderMock = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\SessionInterface')
-          ->setMethods(array('isStarted', 'getId'))
+          ->setMethods(array('isStarted', 'getId', 'start'))
           ->getMockForAbstractClass();
 
         $this->provider = new SymfonySessionIdProvider($this->sessionProviderMock, 'secret');
@@ -38,7 +38,7 @@ class SymfonySessionIdProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSessionIdWithStartedSession()
     {
-        $this->sessionProviderMock->expects($this->once())->method('isStarted')->will($this->returnValue(true));
+        $this->sessionProviderMock->expects($this->atLeastOnce())->method('isStarted')->will($this->returnValue(true));
         $this->sessionProviderMock->expects($this->once())->method('getId')->will($this->returnValue('42'));
 
         $this->assertEquals(sha1('secret42'), $this->provider->getSessionId());
@@ -46,7 +46,18 @@ class SymfonySessionIdProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSessionIdWithoutStartedSession()
     {
-        $this->sessionProviderMock->expects($this->once())->method('isStarted')->will($this->returnValue(false));
+        $this->sessionProviderMock->expects($this->atLeastOnce())->method('isStarted')->will($this->returnValue(false));
+        $this->sessionProviderMock->expects($this->never())->method('getId');
+
+        $this->assertEquals(null, $this->provider->getSessionId());
+    }
+
+    public function testStartSessionIfNotYetStarted()
+    {
+        $this->provider = new SymfonySessionIdProvider($this->sessionProviderMock, 'secret', true);
+
+        $this->sessionProviderMock->expects($this->atLeastOnce())->method('isStarted')->will($this->returnValue(false));
+        $this->sessionProviderMock->expects($this->once())->method('start');
         $this->sessionProviderMock->expects($this->never())->method('getId');
 
         $this->assertEquals(null, $this->provider->getSessionId());

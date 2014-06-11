@@ -27,6 +27,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $processedConfig = array(
           'request_id' => false,
           'session_id' => false,
+          'session_start' => false,
           'additions' => array(),
           'logger' => array(
             'on_request' => false,
@@ -42,6 +43,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $config = array(
           'request_id' => true,
           'session_id' => true,
+          'session_start' => true,
           'additions' => array(
             'foo' => 'bar',
             'example' => 42,
@@ -54,6 +56,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $processedConfig = array(
           'request_id' => true,
           'session_id' => true,
+          'session_start' => true,
           'additions' => array(
             'foo' => 'bar',
             'example' => 42,

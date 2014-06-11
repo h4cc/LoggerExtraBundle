@@ -62,6 +62,9 @@ silpion_logger_extra:
     # If a salted SHA1 of the session_id should be added to the [extra] section of each log message.
     session_id:           true
 
+    # If the session should be started, so the session_id will always be available.
+    session_start:        false
+
     # A list of "key: value" entries that will be set in the [extra] section of each log message (Overwrites existing keys!).
     additions:
         server_id: 42

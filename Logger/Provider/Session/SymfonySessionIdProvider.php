@@ -27,10 +27,14 @@ class SymfonySessionIdProvider implements SessionIdProvider
     /** @var  string */
     private $secret;
 
-    public function __construct(SessionInterface $session, $secret)
+    /** @var  bool */
+    private $startSession;
+
+    public function __construct(SessionInterface $session, $secret, $startSession=false)
     {
         $this->session = $session;
         $this->secret = $secret;
+        $this->startSession = $startSession;
     }
 
     /**
@@ -41,6 +45,10 @@ class SymfonySessionIdProvider implements SessionIdProvider
      */
     public function getSessionId()
     {
+        if($this->startSession && !$this->session->isStarted()) {
+            $this->session->start();
+        }
+
         if ($this->session->isStarted()) {
             // We assume the sessionId contains data and has to be protected,
             // so we use a salted SHA1 checksum.

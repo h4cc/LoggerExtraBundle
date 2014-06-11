@@ -39,6 +39,8 @@ class SilpionLoggerExtraExtension extends Extension
             $container->setParameter('silpion_logger_extra.secret', $container->getParameter('kernel.secret'));
         }
 
+        $container->setParameter('silpion_logger_extra.logger.provider.session_id.session_start', $config['session_start']);
+
         $this->addMonologProcessors($container, $config);
         $this->addAdditions($container, $config['additions']);
         $this->addLogger($container, $config['logger']);
