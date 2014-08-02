@@ -27,7 +27,7 @@ class EnrichedRequestIdProvider implements RequestIdProvider
 
     public function __construct()
     {
-        $this->uniqId = $this->createMongoDbLikeId(time(), php_uname('n'), posix_getpid(), 0);
+        $this->uniqId = $this->createMongoDbLikeId(time(), php_uname('n'), getmypid(), 0);
     }
 
     /**
