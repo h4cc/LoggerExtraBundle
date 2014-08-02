@@ -30,6 +30,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
           'session_id' => false,
           'session_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider',
           'session_start' => false,
+          'process_id' => false,
           'additions' => array(),
           'logger' => array(
             'on_request' => false,
@@ -48,6 +49,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
           'session_id' => true,
           'session_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider',
           'session_start' => true,
+          'process_id' => true,
           'additions' => array(
             'foo' => 'bar',
             'example' => 42,
@@ -63,6 +65,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
           'session_id' => true,
           'session_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider',
           'session_start' => true,
+          'process_id' => true,
           'additions' => array(
             'foo' => 'bar',
             'example' => 42,

@@ -62,6 +62,12 @@ class SilpionLoggerExtraExtension extends Extension
             $container->getDefinition('silpion_logger_extra.logger.processor.session_id')
               ->addTag('monolog.processor', array('method' => 'processRecord'));
         }
+
+        // Activate adding if process_id if enabled.
+        if ($config['process_id']) {
+            $container->getDefinition('silpion_logger_extra.logger.processor.process_id')
+              ->addTag('monolog.processor', array('method' => 'processRecord'));
+        }
     }
 
     protected function addAdditions(ContainerBuilder $container, array $additions)

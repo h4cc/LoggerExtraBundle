@@ -27,6 +27,8 @@ file that was distributed with this source code.
         <parameter key="silpion_logger_extra.logger.provider.session_id.class">Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider</parameter>
         <parameter key="silpion_logger_extra.logger.provider.session_id.session_start">false</parameter>
 
+        <parameter key="silpion_logger_extra.logger.processor.process_id.class">Silpion\LoggerExtraBundle\Logger\Processor\ProcessIdProcessor</parameter>
+
         <parameter key="silpion_logger_extra.logger.processor.additions.class">Silpion\LoggerExtraBundle\Logger\Processor\AdditionsProcessor</parameter>
 
         <parameter key="silpion_logger_extra.logger.request.class">Silpion\LoggerExtraBundle\Logger\Request\BasicRequestLogger</parameter>
@@ -80,6 +82,11 @@ file that was distributed with this source code.
             <argument>%silpion_logger_extra.secret%</argument>
             <argument>%silpion_logger_extra.logger.provider.session_id.session_start%</argument>
         </service>
+
+
+        <!-- ProcessId -->
+
+        <service id="silpion_logger_extra.logger.processor.process_id" class="%silpion_logger_extra.logger.processor.process_id.class%" />
 
 
         <!-- Additions -->

@@ -68,6 +68,9 @@ silpion_logger_extra:
     # Class of the used session_id provider.
     session_id_provider:  Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider
 
+    # If the current PID of the PHP Interpreter should be added to the [extra] section of each log message.
+    process_id:           true
+
     # If the session should be started, so the session_id will always be available.
     session_start:        false
 
