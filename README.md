@@ -59,8 +59,14 @@ silpion_logger_extra:
     # If a random request_id should be added to the [extra] section of each log message.
     request_id:           true
 
+    # Class of the used request_id provider.
+    request_id_provider:  Silpion\LoggerExtraBundle\Logger\Provider\Request\UniqRequestIdProvider
+
     # If a salted SHA1 of the session_id should be added to the [extra] section of each log message.
     session_id:           true
+
+    # Class of the used session_id provider.
+    session_id_provider:  Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider
 
     # If the session should be started, so the session_id will always be available.
     session_start:        false
@@ -77,6 +83,14 @@ silpion_logger_extra:
         # Will create a log entry on each outgoing response.
         on_response:          true
 ```
+
+## Available Providers
+
+### RequestIdProvider
+
+Next to the `UniqRequestIdProvider`, which will generate a simple sha1 hash,
+there is also the `EnrichedRequestIdProvider` that will generate MongoDb ObjectId like hashes containing the current timestamp, machineId, processId.
+The `EnrichedRequestIdProvider` will generate request_id, that will be sortable by creation time.
 
 
 Usage
