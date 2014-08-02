@@ -26,7 +26,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $config = array();
         $processedConfig = array(
           'request_id' => false,
+          'request_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Request\UniqRequestIdProvider',
           'session_id' => false,
+          'session_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider',
           'session_start' => false,
           'additions' => array(),
           'logger' => array(
@@ -42,7 +44,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
     {
         $config = array(
           'request_id' => true,
+          'request_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Request\EnrichedRequestIdProvider',
           'session_id' => true,
+          'session_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider',
           'session_start' => true,
           'additions' => array(
             'foo' => 'bar',
@@ -55,7 +59,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         );
         $processedConfig = array(
           'request_id' => true,
+          'request_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Request\EnrichedRequestIdProvider',
           'session_id' => true,
+          'session_id_provider' => 'Silpion\LoggerExtraBundle\Logger\Provider\Session\SymfonySessionIdProvider',
           'session_start' => true,
           'additions' => array(
             'foo' => 'bar',
