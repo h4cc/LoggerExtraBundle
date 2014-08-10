@@ -1,11 +1,14 @@
-
-
-before_commands:
-    - "composer install --prefer-dist --no-interaction"
-
 tools:
-    php_code_coverage:
+    external_code_coverage: true
+    php_mess_detector:
         enabled: true
-        test_command: php vendor/bin/phpunit
-
-
+    php_analyzer:
+        enabled: true
+    php_code_sniffer:
+        enabled: true
+        config:
+            standard: PSR2
+    sensiolabs_security_checker:
+        enabled: true
+    php_pdepend:
+        enabled: true
