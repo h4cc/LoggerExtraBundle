@@ -89,7 +89,7 @@ class SilpionLoggerExtraExtension extends Extension
               array(
                 'event' => 'kernel.request',
                 'method' => 'onKernelRequest',
-                'priority' => 500
+                'priority' => 255 // be the first listener to kick in
               )
             );
         }
@@ -101,7 +101,7 @@ class SilpionLoggerExtraExtension extends Extension
               array(
                 'event' => 'kernel.response',
                 'method' => 'onKernelResponse',
-                'priority' => 500
+                'priority' => -255 // be the last listener to kick in
               )
             );
         }
